@@ -1,12 +1,13 @@
 {
-  "name": "json-connector",
+  "name": "orchestructor",
   "version": "1.0.0",
   "main": "index.js",
+  "license": "MIT",
+  "author": "Ahmad Raza <iamfotx@gmail.com> (https://twitter.com/iamfotx)",
   "engines": {
     "node": ">=14.17.x",
     "yarn": ">=1.22.x"
   },
-  "license": "MIT",
   "dependencies": {
     "esbuild": "^0.12.15",
     "react": "^17.0.2",
