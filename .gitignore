@@ -1,6 +1,6 @@
 .gtm
 .DS_Store
-.env.development
+.env.*
 
 node_modules
 build
