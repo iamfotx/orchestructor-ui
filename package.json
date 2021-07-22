@@ -19,7 +19,7 @@
     "cross-env": "^7.0.3"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=development node ./scripts/esbuild/build.js",
-    "build:prod": "node ./scripts/esbuild/build.js"
+    "build": "cross-env NODE_ENV=development node ./scripts/esbuild/",
+    "build:prod": "cross-env NODE_ENV=production node ./scripts/esbuild/"
   }
 }
