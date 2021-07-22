@@ -1,3 +1,6 @@
-const greetings = (name) => `hello ${name}!`
+import {add} from './math'
 
-console.log(greetings('Ahmad'))
+const result = add(1, 2);
+
+console.log('result', result)
+console.log('API_URL: ', process.env.API_URL)

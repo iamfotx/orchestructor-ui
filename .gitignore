@@ -1,4 +1,6 @@
 .gtm
+.DS_Store
+.env.development
+
 node_modules
 build
-.DS_Store
