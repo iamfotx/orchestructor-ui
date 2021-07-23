@@ -1,14 +1,21 @@
 {
-  "name": "orchestructor",
+  "name": "orchestructor-ui",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
+  "license": "MIT",
   "engines": {
     "node": ">=14.17.x",
     "yarn": ">=1.22.x"
   },
-  "license": "MIT",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
   "devDependencies": {
     "webpack": "^5.46.0",
     "webpack-cli": "^4.7.2"
+  },
+  "scripts": {
+    "webpack": "webpack ."
   }
 }
