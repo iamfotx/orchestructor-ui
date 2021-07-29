@@ -2,10 +2,12 @@
 
 1. **Issue/Bug Link:**
 
-   - fixes #
+   - fixes (#)
 
 2. **Brief Description:**
 
    -
 
 3. **Additional Info:**
+
+   -
