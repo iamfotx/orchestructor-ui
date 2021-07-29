@@ -1,5 +1,3 @@
-/** @format */
-
 const OFF = 0;
 const WARN = 1;
 const ERROR = 2;
@@ -55,5 +53,7 @@ module.exports = {
     'react/react-in-jsx-scope': OFF,
     'react-hooks/rules-of-hooks': ERROR,
     'react-hooks/exhaustive-deps': WARN,
+    // custom
+    '@typescript-eslint/no-var-requires': OFF,
   },
 };
