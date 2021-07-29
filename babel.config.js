@@ -1,5 +1,5 @@
 module.exports = function (api) {
-  api.cache(true)
+  api.cache(true);
   const presets = [
     '@babel/preset-env',
     [
@@ -17,9 +17,9 @@ module.exports = function (api) {
         useSpread: true,
       },
     ],
-  ]
+  ];
 
   return {
     presets,
-  }
-}
+  };
+};
