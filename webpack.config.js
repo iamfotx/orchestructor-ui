@@ -4,20 +4,23 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const PATHS = {
   entryPath: path.resolve(__dirname, './src/index.tsx'),
   outputPath: path.resolve(__dirname, './dist'),
-  templatePath: path.resolve(__dirname, './public/index.html')
+  templatePath: path.resolve(__dirname, './public/index.html'),
 }
 
-const isProduction =  process.env.NODE_ENV === "production";
+const mode = process.env.NODE_ENV
+
+const isProduction = mode === 'production'
+const target = isProduction ? 'browserslist' : 'web'
 
 const webpackConfig = {
-  mode: 'development',
+  mode,
   devtool: 'source-map', // 'inline-source-map',
   entry: PATHS.entryPath,
-  target: isProduction ? "browserslist" : "web",
+  target,
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
-      "react/jsx-runtime": "react/jsx-runtime.js"
+      'react/jsx-runtime': 'react/jsx-runtime.js',
     },
   },
   output: {
@@ -28,8 +31,7 @@ const webpackConfig = {
   },
   devServer: {
     contentBase: PATHS.outputPath,
-    historyApiFallback: true,
-    hot: true
+    hot: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -42,8 +44,12 @@ const webpackConfig = {
       {
         test: /\.tsx?$/,
         exclude: /(node_modules)/,
-        use: 'babel-loader'
-        }
+        use: 'babel-loader',
+      },
+      {
+        test: /\.s?css$/i,
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+      }
     ],
   },
 }
