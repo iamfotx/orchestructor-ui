@@ -1,3 +1,8 @@
-export function Header() {
-  return <h1>Orchestructor UI</h1>;
+export function Header(): JSX.Element {
+  return (
+    <>
+      <h1>Orchestructor UI</h1>
+      <p>Test Prod Release</p>
+    </>
+  );
 }
