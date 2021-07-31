@@ -1,12 +1,18 @@
-name: Prod Build and Deploy to Netlify
+name: CD
 
 on:
-  release:
-    types: [published]
+  workflow_run:
+    workflows: ["CI"]
+    branches: [develop]
+    paths:
+      - 'src/**'
+    types: 
+      - completed
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     strategy:
       matrix:
         node-version: [14.x]
@@ -18,17 +24,18 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn
-      - run: yarn build:prod
+      - run: yarn build
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
+          alias: develop
           publish-dir: './dist'
           production-branch: master
-          production-deploy: true
+          production-deploy: false
           enable-pull-request-comment: false
           enable-commit-comment: false
           overwrites-pull-request-comment: false
-          deploy-message: ${{ github.event.commits[0].message }}
+          deploy-message: ${{ github.event.head_commit.message }}
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
