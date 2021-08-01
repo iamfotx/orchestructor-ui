@@ -12,9 +12,13 @@ function App() {
   return (
     <>
       <Header />
-      <p className="m-2">{count}</p>
-      <button className="btn" onClick={incrementCounter}>+1</button>
-      <button className="btn" onClick={decrementCounter}>-1</button>
+      <p className="m-3">{count}</p>
+      <button className="btn" onClick={incrementCounter}>
+        +1
+      </button>
+      <button className="btn" onClick={decrementCounter}>
+        -1
+      </button>
     </>
   );
 }
