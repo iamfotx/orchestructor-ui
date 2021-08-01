@@ -2,7 +2,8 @@ import {useState} from 'react';
 import {render} from 'react-dom';
 
 import {Header} from './header';
-import './index.scss';
+
+import './styles/index.css';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -11,9 +12,13 @@ function App() {
   return (
     <>
       <Header />
-      <p>{count}</p>
-      <button onClick={incrementCounter}>+1</button>
-      <button onClick={decrementCounter}>-1</button>
+      <p className="m-3">{count}</p>
+      <button className="btn" onClick={incrementCounter}>
+        +1
+      </button>
+      <button className="btn" onClick={decrementCounter}>
+        -1
+      </button>
     </>
   );
 }

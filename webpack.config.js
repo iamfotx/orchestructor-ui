@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const PATHS = {
   entryPath: path.resolve(__dirname, './src/index.tsx'),
@@ -38,6 +39,7 @@ const webpackConfig = {
       title: 'Orchestructor UI',
       template: PATHS.templatePath,
     }),
+    ...(isProduction ? [new MiniCssExtractPlugin()] : []),
   ],
   module: {
     rules: [
@@ -47,8 +49,12 @@ const webpackConfig = {
         use: 'babel-loader',
       },
       {
-        test: /\.s?css$/i,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+        test: /\.css$/i,
+        use: [
+          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+          'css-loader',
+          'postcss-loader',
+        ],
       },
     ],
   },
