@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { render } from 'react-dom';
 
 import { Header } from './header';
-import './test';
 
 import './styles/index.css';
 
