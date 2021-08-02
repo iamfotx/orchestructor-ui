@@ -1,63 +1,50 @@
 const path = require('path');
+const webpack = require('webpack');
+const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const presetConfig = require('./build-utils/load-presets');
 
-const PATHS = {
-  entryPath: path.resolve(__dirname, './src/index.tsx'),
-  outputPath: path.resolve(__dirname, './dist'),
-  templatePath: path.resolve(__dirname, './public/index.html'),
+const paths = {
+  entryPath: path.resolve(process.cwd(), './src/index.tsx'),
+  outputPath: path.resolve(process.cwd(), './dist'),
+  templatePath: path.resolve(process.cwd(), './public/index.html'),
 };
 
-const mode = process.env.NODE_ENV;
+const getModeConfig = (mode) =>
+  require(`./build-utils/webpack.${mode}`)(mode, paths);
 
-const isProduction = mode === 'production';
-const target = isProduction ? 'browserslist' : 'web';
-
-const webpackConfig = {
-  mode,
-  devtool: 'source-map', // 'inline-source-map',
-  entry: PATHS.entryPath,
-  target,
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
-    alias: {
-      'react/jsx-runtime': 'react/jsx-runtime.js',
-    },
-  },
-  output: {
-    filename: '[name].[contenthash].js',
-    sourceMapFilename: '[name].[contenthash].map',
-    path: PATHS.outputPath,
-    clean: true,
-  },
-  devServer: {
-    contentBase: PATHS.outputPath,
-    hot: true,
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: 'Orchestructor UI',
-      template: PATHS.templatePath,
-    }),
-    ...(isProduction ? [new MiniCssExtractPlugin()] : []),
-  ],
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        exclude: /(node_modules)/,
-        use: 'babel-loader',
+const configOptions = (_, { mode = 'production', env: { presets } = {} }) =>
+  merge(
+    {
+      entry: paths.entryPath,
+      output: {
+        filename: '[name].[contenthash].js',
+        sourceMapFilename: '[name].[contenthash].map',
+        chunkFilename: '[name].[contenthash].lazy-chunk.js',
+        path: paths.outputPath,
+        clean: true,
       },
-      {
-        test: /\.css$/i,
-        use: [
-          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
-          'css-loader',
-          'postcss-loader',
+      resolve: {
+        extensions: ['.tsx', '.ts', '.js'],
+      },
+      module: {
+        rules: [
+          {
+            test: /\.tsx?$/,
+            exclude: /(node_modules)/,
+            use: 'babel-loader',
+          },
         ],
       },
-    ],
-  },
-};
+      plugins: [
+        new HtmlWebpackPlugin({
+          template: paths.templatePath,
+        }),
+        new webpack.ProgressPlugin(),
+      ],
+    },
+    getModeConfig(mode),
+    presetConfig({ mode, presets }),
+  );
 
-module.exports = webpackConfig;
+module.exports = configOptions;
