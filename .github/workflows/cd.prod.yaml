@@ -1,31 +1,28 @@
-name: CD
+name: CD (production)
 
 on:
-  workflow_run:
-    workflows: ["CI"]
-    branches: [master]
-    release: 
-      types: [published]
-    types: 
-      - completed
-
+  release:
+    types: [published]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    env:
+      NODE_ENV: production
     strategy:
       matrix:
         node-version: [14.x]
     steps:
       - uses: actions/checkout@v2
-      - uses: c-hive/gha-yarn-cache@v1
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - name: Setup node
+        uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
-      - run: yarn
-      - run: yarn build:prod
+          node-version: ${{ matrix.node }}
+          cache: 'yarn'
+      - name: Install deps...
+        run: yarn install --production
+      - name: Build
+        run: yarn build
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
@@ -35,7 +32,7 @@ jobs:
           enable-pull-request-comment: false
           enable-commit-comment: false
           overwrites-pull-request-comment: false
-          deploy-message: ${{ github.event.head_commit.message }}
+          deploy-message: ${{ github.event.release.tag_name }}
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
