@@ -11,7 +11,7 @@ jobs:
       NODE_ENV: production
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [14.17.x]
     steps:
       - uses: actions/checkout@v2
       - name: Setup node
