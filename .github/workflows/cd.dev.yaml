@@ -1,18 +1,14 @@
 name: CD (development)
 
 on:
-  workflow_run:
-    workflows: ['CI']
+  push:
     branches: [develop]
     paths:
       - 'src/**'
-    types:
-      - completed
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     env:
       NODE_ENV: development
     strategy:
@@ -27,7 +23,7 @@ jobs:
           cache: 'yarn'
       - name: Install deps...
       - run: yarn
-      -name: Build
+      - name: Build
       - run: yarn build:dev
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
