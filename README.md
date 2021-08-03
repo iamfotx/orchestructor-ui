@@ -13,9 +13,9 @@
 
 - [Prerequisites](#prerequisites)
 - [Local Setup](#local-setup)
-- [Deployment & Release](#deployment-&-release)
-    - [🥁 Dev Deployment](#-dev-deployment)
-    - [🚀 Production Deployment](#-production-deployment)
+- [Deployment & Release](#deployment--release)
+    - [🥁 Dev Deployment](#dev-deployment)
+    - [🚀 Production Deployment](#production-deployment)
 
 
 ## Prerequisites
@@ -48,6 +48,7 @@ yarn build:dev
 ```
 
 ## Deployment & Release
+
 `orchestructor-ui` uses `github-actions` for releases and deployments with the help of `netlify`. Github Actions are set up to deploy specific branches and git tags (version tags).
 
 ### Dev Deployment
@@ -57,6 +58,7 @@ yarn build:dev
 3. Once required checks have passed & you have received a code review approval (ofc, only if team < 1), merge your commit into the `develop` branch
 
 ### Production Deployment
+
 1. Create a "Release" ticket on the [Orchestructor Release Board][release-board]
 2. Create a new pull request against the `master` branch from your dev branch (i.e. `develop`)
 3. Add the `release-candidate` label in GitHub to your PR
