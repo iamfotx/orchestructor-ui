@@ -1,9 +1,9 @@
 module.exports = function (api) {
   api.cache(true);
   const presets = [
-    '@babel/preset-env',
+    '@babel/env',
     [
-      '@babel/preset-typescript',
+      '@babel/typescript',
       {
         onlyRemoveTypeImports: true,
         allExtensions: true,
@@ -11,10 +11,9 @@ module.exports = function (api) {
       },
     ],
     [
-      '@babel/preset-react',
+      '@babel/react',
       {
         runtime: 'automatic',
-        useSpread: true,
       },
     ],
   ];
