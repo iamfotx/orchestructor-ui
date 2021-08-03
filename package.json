@@ -54,11 +54,11 @@
     "build:dev": "cross-env NODE_ENV=development webpack --mode development",
     "build:analyze": "yarn build --env presets=analyze",
     "build:compress": "yarn build --env presets=compression",
-    "lint": "./node_modules/.bin/eslint --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx,.cjs .",
-    "prettier": "./node_modules/.bin/prettier --ignore-path .gitignore \"**/*.+(js|jsx|ts|tsx|cjs|css|scss|json)\"",
+    "lint": "./node_modules/.bin/eslint --ignore-path .gitignore --ext .js,.ts,.jsx,.tsx .",
+    "prettier": "./node_modules/.bin/prettier --ignore-path .gitignore \"**/*.+(js|ts|jsx|tsx|css|json)\"",
     "format": "yarn prettier --write",
     "check:format": "yarn prettier --list-different",
     "check:types": "tsc",
-    "validate": "npm-run-all --parallel lint check:format check:types"
+    "validate": "npm-run-all --parallel lint check:format check:types build"
   }
 }

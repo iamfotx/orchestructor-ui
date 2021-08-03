@@ -42,6 +42,19 @@ const configOptions = (_, { mode = 'production', env: { presets } = {} }) =>
         }),
         new webpack.ProgressPlugin(),
       ],
+      optimization: {
+        moduleIds: 'deterministic',
+        runtimeChunk: 'single',
+        splitChunks: {
+          cacheGroups: {
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendors',
+              chunks: 'all',
+            },
+          },
+        },
+      },
     },
     getModeConfig(mode),
     presetConfig({ mode, presets }),
