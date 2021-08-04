@@ -2,8 +2,10 @@ module.exports = (_, paths) => ({
   target: 'web',
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: paths.outputPath,
-    hot: true,
+    // hot: true,
+    liveReload: true,
+    // watchFiles: paths.outputPath,
+    historyApiFallback: true,
   },
   module: {
     rules: [

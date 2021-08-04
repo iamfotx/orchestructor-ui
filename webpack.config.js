@@ -19,8 +19,8 @@ const configOptions = (_, { mode = 'production', env: { presets } = {} }) =>
       entry: paths.entryPath,
       output: {
         filename: '[name].[contenthash].js',
-        sourceMapFilename: '[name].[contenthash].map',
-        chunkFilename: '[name].[contenthash].lazy-chunk.js',
+        // sourceMapFilename: '[name].[contenthash].map',
+        // chunkFilename: '[name].[contenthash].lazy-chunk.js',
         path: paths.outputPath,
         clean: true,
       },
