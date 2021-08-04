@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
-    "noImplicitAny": true,
-    "jsx": "react-jsx",
     "noEmit": true,
-    "strictFunctionTypes": true,
-    "strictNullChecks": true
+    "baseUrl": "./src",
+    "jsx": "react-jsx",
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true
   },
   "exclude": ["node_modules"]
 }
