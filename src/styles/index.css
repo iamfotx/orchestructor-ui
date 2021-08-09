@@ -13,3 +13,12 @@
     @apply px-4 py-2 rounded font-semibold bg-gray-200 text-black ml-2;
   }
 }
+
+@layer utilities {
+  .cursor-grab {
+    cursor: grab;
+  }
+  .no-pointer-event * {
+    pointer-events: none;
+  }
+}
