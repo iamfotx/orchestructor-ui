@@ -10,8 +10,7 @@ const paths = {
   templatePath: path.resolve(process.cwd(), './public/index.html'),
 };
 
-const getModeConfig = (mode) =>
-  require(`./build-utils/webpack.${mode}`)(mode, paths);
+const getModeConfig = (mode) => require(`./build-utils/webpack.${mode}`)();
 
 const configOptions = (_, { mode = 'production', env: { presets } = {} }) =>
   merge(
