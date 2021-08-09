@@ -24,7 +24,7 @@ jobs:
       - name: Install deps...
         run: yarn
       - name: Build
-        run: yarn build:dev
+        run: yarn build
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
