@@ -5,6 +5,7 @@ module.exports = () => ({
   target: 'browserslist',
   externals: {
     react: 'React',
+    recoil: 'Recoil',
     jsonata: 'jsonata',
     'react-dom': 'ReactDOM',
   },
